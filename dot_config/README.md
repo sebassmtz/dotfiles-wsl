@@ -18,7 +18,7 @@ wsl --set-default-version 2
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-#### Include HomeBrew Path
+#### Include HomeBrew Path Bash
 ```bash
 Change 'sebas' with the device username
 
@@ -32,7 +32,7 @@ sudo apt-get upgrade
 sudo apt-get install build-essential
 ```
 
-## Install Libs
+### Install Libs
 
 ```bash
 brew install chezmoi 
@@ -60,13 +60,21 @@ echo zshPath | sudo tee -a /etc/shells
 sudo chsh -s zshPath
 ```
 
-## Install Oh-My-ZSH
+### Install Oh-My-ZSH
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-## Install following dependencies
+### Include HomeBrew Path ZSH
+```bash
+Change 'sebas' with the device username
+
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/sebas/.zshrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
+
+### Install following dependencies
 ```bash
 brew install gcc
 brew install fzf
@@ -74,10 +82,25 @@ brew install fd
 brew install ripgrep
 ```
 
-## Install Font Iosevka Nerd
+### Install Font Iosevka Nerd
+
+```bash
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IosevkaTerm.zip
+
+unzip IosevkaTerm.zip -d IosevkaTerm
+
+// Local
+cp -r IosevkaTerm ~/.local/share/fonts/
+
+//Root
+sudo cp -r IosevkaTerm /usr/share/fonts/
 
 
-## Install Starship Prompt:
+
+```
+
+
+### Install Starship Prompt:
 
 ```bash
 curl -sS https://starship.rs/install.sh | sh
