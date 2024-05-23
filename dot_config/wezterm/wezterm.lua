@@ -32,10 +32,12 @@ config.cell_width = 1.0
 config.line_height = 1.0
 config.window_background_opacity = 0.85
 config.enable_tab_bar = false
-
-config.font = wezterm.font 'IosevkaTerm NFM'
 config.hide_tab_bar_if_only_one_tab = true
+config.font = wezterm.font 'IosevkaTerm NFM'
 config.term = "wezterm"
+config.window_decorations = "INTEGRATED_BUTTONS"
+config.window_close_confirmation = "NeverPrompt"
+config.use_resize_increments = false
 config.window_padding = {
 	left = 5,
 	right = 5,
@@ -56,7 +58,6 @@ for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
 		break
 	end
 end
-
 
 -- and finally, return the configuration to wezterm
 return config
