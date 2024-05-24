@@ -30,7 +30,8 @@ export VISUAL='nvim'
 
 # Directory commands
 alias ls='lsd'
-alias ll='ls -la'
+alias ll='lsd -la'
+
 alias cat='bat'
 # alias c='clear'
 
@@ -47,3 +48,4 @@ source "/home/linuxbrew/.linuxbrew/opt/antidote/share/antidote/antidote.zsh"
 antidote load
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(zellij setup --generate-auto-start zsh)"
