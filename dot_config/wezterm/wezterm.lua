@@ -67,6 +67,14 @@ config.window_padding = {
 	bottom = 0,
 }
 
+-- keybindings
+config.keys = {
+	-- Mapear Ctrl+C para copiar
+	{ key = "c", mods = "CTRL", action = wezterm.action { CopyTo = "Clipboard" } },
+	-- Mapear Ctrl+V para pegar
+	{ key = "v", mods = "CTRL", action = wezterm.action { PasteFrom = "Clipboard" } },
+}
+
 -- activate ONLY if windows --
 
 config.default_domain = 'WSL:Ubuntu'
