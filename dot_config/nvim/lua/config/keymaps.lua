@@ -4,6 +4,13 @@ local opts = { noremap = true, silent = true }
 -- Shorten function name
 local keymap = vim.keymap.set
 
+-- REQUIRED
+local oil = require("oil")
+local harpoon = require("harpoon")
+harpoon:setup()
+oil.setup()
+-- REQUIRED
+
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
 
@@ -12,11 +19,6 @@ keymap("i", "<C-b>", "<C-o>de")
 
 -- Exit and quit all buffers
 keymap("c", "Q", "<cmd>qa!<cr>", opts)
-
--- REQUIRED
-local oil = require("oil")
-oil.setup()
--- REQUIRED
 
 -----  OIL -----
 keymap("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
@@ -28,6 +30,31 @@ keymap(
   '<Esc>:%bdelete|edit #|normal`"<Return>',
   { desc = "Delete other buffers but the current one" }
 )
+
+----- HARPOON 2 -----
+keymap("n", "<leader>a", function()
+  harpoon:list():add()
+end, { desc = "Add harpoon mark" })
+
+keymap("n", "<C-e>", function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
+
+keymap("n", "<C-M-h>", function()
+  harpoon:list():select(1)
+end)
+
+keymap("n", "<C-M-j>", function()
+  harpoon:list():select(2)
+end)
+
+keymap("n", "<C-M-k>", function()
+  harpoon:list():select(3)
+end)
+
+keymap("n", "<C-M-l>", function()
+  harpoon:list():select(4)
+end)
 
 -- Disable key mappings in insert mode
 keymap("i", "<A-j>", "<Nop>", opts)
