@@ -6,6 +6,10 @@ return {
     opts = {
       transparent_background = true,
       flavour = "mocha",
+      background = {
+        light = "latte",
+        dark = "mocha",
+      },
     },
     integrations = {
       cmp = true,
@@ -17,7 +21,6 @@ return {
         enabled = true,
         indentscope_color = "",
       },
-      -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
   },
   {

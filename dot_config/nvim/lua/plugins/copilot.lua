@@ -1,45 +1,62 @@
 return {
-  "zbirenbaum/copilot.lua",
-  dependencies = {
-    "zbirenbaum/copilot-cmp",
+  {
+
+    "zbirenbaum/copilot.lua",
+    dependencies = {
+      "zbirenbaum/copilot-cmp",
+    },
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = false,
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<C-g>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        filetypes = {
+          cvs = false,
+        },
+        copilot_node_command = "node",
+        server_opts_overrides = {},
+      })
+      require("copilot_cmp").setup({})
+    end,
   },
-  cmd = "Copilot",
-  event = "InsertEnter",
-  config = function()
-    require("copilot").setup({
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-        keymap = {
-          jump_prev = "[[",
-          jump_next = "]]",
-          accept = "<CR>",
-        },
-        layout = {
-          position = "right", -- | top | left | right
-          ratio = 0.4,
-        },
+  {
+    "nvim-cmp",
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        dependencies = "copilot.lua",
+        opts = {},
+        config = function(_, opts)
+          local copilot_cmp = require("copilot_cmp")
+          copilot_cmp.setup(opts)
+          LazyVim.lsp.on_attach(function(client)
+            copilot_cmp._on_insert_enter({})
+          end, "copilot")
+        end,
       },
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        debounce = 75,
-        keymap = {
-          accept = "<C-y>",
-          accept_word = false,
-          accept_line = false,
-          -- Change for <C-y> in insert mode
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<C-]>",
-        },
-      },
-      filetypes = {
-        cvs = false,
-      },
-      copilot_node_command = "node", -- Node.js version must be > 16.x
-      server_opts_overrides = {},
-    })
-    require("copilot_cmp").setup({})
-  end,
+    },
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      table.insert(opts.sources, 1, {
+        name = "copilot",
+        group_index = 1,
+        priority = 100,
+      })
+    end,
+  },
 }
