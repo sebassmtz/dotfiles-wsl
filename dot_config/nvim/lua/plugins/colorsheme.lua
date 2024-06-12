@@ -6,10 +6,6 @@ return {
     opts = {
       transparent_background = true,
       flavour = "mocha",
-      background = {
-        light = "latte",
-        dark = "mocha",
-      },
     },
     integrations = {
       cmp = true,
@@ -63,14 +59,21 @@ return {
     },
   },
   {
-    "sainnhe/everforest",
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    priority = 1000, -- make sure to load this before all the other start plugins
+    -- Optional; default configuration will be used if setup isn't called.
     config = function()
-      vim.g.everforest_transparent_background = 1
-      vim.g.everforest_background = "hard"
-      vim.g.everforest_enable_italic = 1
-      vim.g.everforest_float_style = "dim"
+      require("everforest").setup({
+        background = "hard",
+        transparent_background_level = 1,
+      })
     end,
   },
+  { "NTBBloodbath/doom-one.nvim", name = "doom-one" },
+  { "AhmedAbdulrahman/aylin.vim", name = "aylin" },
+  -- { "xiyaowong/transparent.nvim" },
   {
     "LazyVim/LazyVim",
     opts = {
